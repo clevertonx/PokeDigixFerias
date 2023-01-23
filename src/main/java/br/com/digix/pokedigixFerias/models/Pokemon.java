@@ -12,13 +12,16 @@ public class Pokemon {
     private float peso;
     private int felicidade;
     private int nivel;
+    private Ataque ataque;
 
-    public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel)
-            throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException {
+    public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel, Ataque ataque)
+            throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException, NaoPossuiAtaqueException {
         verificarFelicidadeEntreZeroeCem(felicidade);
         verificarNivelEntreUmeCem(nivel);
         verificarAltura(altura);
         verificarPeso(peso);
+        verificarSePossuiAoMenosUmAtaque(ataque);
+        this.ataque = ataque;
         this.nome = nome;
         this.genero = genero;
         this.altura = altura;
@@ -48,6 +51,12 @@ public class Pokemon {
     private void verificarPeso(float peso) throws PesoInvalidoException {
         if (peso < 0) {
             throw new PesoInvalidoException();
+        }
+    }
+
+    private void verificarSePossuiAoMenosUmAtaque(Ataque ataque) throws NaoPossuiAtaqueException {
+        if (ataque == null) {
+            throw new NaoPossuiAtaqueException();
         }
     }
 }

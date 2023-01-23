@@ -8,7 +8,9 @@ import br.com.digix.pokedigixFerias.Builders.PokemonBuilder;
 public class PokemonTest {
     @Test
     public void deve_criar_um_pokemon()
-            throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException {
+            throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException,
+            AcuraciaInvalidaException, ForcaInvalidaException, PontosDePoderInvalidoException,
+            NaoPossuiAtaqueException {
         // Arrange
         String nome = "Pikachu";
         char genero = 'F';
@@ -80,6 +82,15 @@ public class PokemonTest {
         // Action & Assert
         Assertions.assertThrows(PesoInvalidoException.class, () -> {
             new PokemonBuilder().comPeso(-1).construir();
+        });
+    }
+
+    @Test
+    public void deve_ter_pelo_menos_um_ataque() throws AcuraciaInvalidaException, PontosDePoderInvalidoException,
+            ForcaInvalidaException, NaoPossuiAtaqueException {
+
+        Assertions.assertThrows(NaoPossuiAtaqueException.class, () -> {
+            new PokemonBuilder().semAtaque().construir();
         });
     }
 }
