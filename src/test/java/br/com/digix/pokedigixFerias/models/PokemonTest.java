@@ -1,8 +1,13 @@
 package br.com.digix.pokedigixFerias.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.aop.ThrowsAdvice;
 
+import br.com.digix.pokedigixFerias.Builders.AtaqueBuilder;
 import br.com.digix.pokedigixFerias.Builders.PokemonBuilder;
 
 public class PokemonTest {
@@ -10,7 +15,7 @@ public class PokemonTest {
     public void deve_criar_um_pokemon()
             throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException,
             AcuraciaInvalidaException, ForcaInvalidaException, PontosDePoderInvalidoException,
-            NaoPossuiAtaqueException {
+            QuantidadeInvalidaDeAtaquesException {
         // Arrange
         String nome = "Pikachu";
         char genero = 'F';
@@ -87,10 +92,45 @@ public class PokemonTest {
 
     @Test
     public void deve_ter_pelo_menos_um_ataque() throws AcuraciaInvalidaException, PontosDePoderInvalidoException,
-            ForcaInvalidaException, NaoPossuiAtaqueException {
+            ForcaInvalidaException, QuantidadeInvalidaDeAtaquesException {
 
-        Assertions.assertThrows(NaoPossuiAtaqueException.class, () -> {
+        Assertions.assertThrows(QuantidadeInvalidaDeAtaquesException.class, () -> {
             new PokemonBuilder().semAtaque().construir();
+        });
+    }
+
+    @Test
+    public void deve_poder_ter_quatro_ataques() throws Exception {
+
+        Ataque ataque1 = new AtaqueBuilder().construir();
+        Ataque ataque2 = new AtaqueBuilder().construir();
+        Ataque ataque3 = new AtaqueBuilder().construir();
+        Ataque ataque4 = new AtaqueBuilder().construir();
+        List<Ataque> ataques = new ArrayList<>();
+        ataques.add(ataque1);
+        ataques.add(ataque2);
+        ataques.add(ataque3);
+        ataques.add(ataque4);
+
+        Pokemon pokemon = new PokemonBuilder().comAtaques(ataques).construir();
+
+        Assertions.assertTrue(ataques.containsAll(pokemon.getAtaques()));
+
+    }
+
+    @Test
+    public void nao_deve_possuir_mais_que_quatro_ataques() throws Exception {
+
+        List<Ataque> ataques = new ArrayList<>();
+        ataques.add(new AtaqueBuilder().construir());
+        ataques.add(new AtaqueBuilder().construir());
+        ataques.add(new AtaqueBuilder().construir());
+        ataques.add(new AtaqueBuilder().construir());
+        ataques.add(new AtaqueBuilder().construir());
+
+        Assertions.assertThrows(QuantidadeInvalidaDeAtaquesException.class, () -> {
+
+            new PokemonBuilder().comAtaques(ataques).construir();
         });
     }
 }

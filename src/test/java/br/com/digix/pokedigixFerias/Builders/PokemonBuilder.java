@@ -1,11 +1,14 @@
 package br.com.digix.pokedigixFerias.Builders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.digix.pokedigixFerias.models.AcuraciaInvalidaException;
 import br.com.digix.pokedigixFerias.models.AlturaInvalidaException;
 import br.com.digix.pokedigixFerias.models.Ataque;
 import br.com.digix.pokedigixFerias.models.FelicidadeInvalidaException;
 import br.com.digix.pokedigixFerias.models.ForcaInvalidaException;
-import br.com.digix.pokedigixFerias.models.NaoPossuiAtaqueException;
+import br.com.digix.pokedigixFerias.models.QuantidadeInvalidaDeAtaquesException;
 import br.com.digix.pokedigixFerias.models.NivelInvalidoException;
 import br.com.digix.pokedigixFerias.models.PesoInvalidoException;
 import br.com.digix.pokedigixFerias.models.Pokemon;
@@ -19,15 +22,17 @@ public class PokemonBuilder {
     private float peso = 2.1f;
     private int felicidade = 70;
     private int nivel = 5;
-    private Ataque ataque;
+    private List<Ataque> ataques = new ArrayList<>();
 
-    public PokemonBuilder() throws AcuraciaInvalidaException, ForcaInvalidaException, PontosDePoderInvalidoException, NaoPossuiAtaqueException {
-        this.ataque = new AtaqueBuilder().construir();
+    public PokemonBuilder() throws AcuraciaInvalidaException, ForcaInvalidaException, PontosDePoderInvalidoException,
+            QuantidadeInvalidaDeAtaquesException {
+        this.ataques.add(new AtaqueBuilder().construir());
     }
 
     public Pokemon construir()
-            throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException, NaoPossuiAtaqueException {
-        return new Pokemon(nome, genero, altura, peso, felicidade, nivel, ataque);
+            throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException,
+            QuantidadeInvalidaDeAtaquesException {
+        return new Pokemon(nome, genero, altura, peso, felicidade, nivel, ataques);
     }
 
     public PokemonBuilder comFelicidade(int felicidade) {
@@ -51,11 +56,13 @@ public class PokemonBuilder {
     }
 
     public PokemonBuilder semAtaque() {
-        this.ataque = null;
+        this.ataques = new ArrayList<>();
         return this;
     }
 
-    
-    
+    public PokemonBuilder comAtaques(List<Ataque> ataques) {
+        this.ataques = ataques;
+        return this;
+    }
 
 }

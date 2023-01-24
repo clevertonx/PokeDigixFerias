@@ -1,5 +1,8 @@
 package br.com.digix.pokedigixFerias.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 
 @Getter
@@ -12,16 +15,17 @@ public class Pokemon {
     private float peso;
     private int felicidade;
     private int nivel;
-    private Ataque ataque;
+    private List<Ataque> ataques = new ArrayList<>();
 
-    public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel, Ataque ataque)
-            throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException, NaoPossuiAtaqueException {
+    public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel, List<Ataque> ataques)
+            throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException,
+            QuantidadeInvalidaDeAtaquesException {
         verificarFelicidadeEntreZeroeCem(felicidade);
         verificarNivelEntreUmeCem(nivel);
         verificarAltura(altura);
         verificarPeso(peso);
-        verificarSePossuiAoMenosUmAtaque(ataque);
-        this.ataque = ataque;
+        verificarQuantidadeDeAtaque(ataques);
+        this.ataques = ataques;
         this.nome = nome;
         this.genero = genero;
         this.altura = altura;
@@ -54,9 +58,9 @@ public class Pokemon {
         }
     }
 
-    private void verificarSePossuiAoMenosUmAtaque(Ataque ataque) throws NaoPossuiAtaqueException {
-        if (ataque == null) {
-            throw new NaoPossuiAtaqueException();
+    private void verificarQuantidadeDeAtaque(List<Ataque> ataques) throws QuantidadeInvalidaDeAtaquesException {
+        if (ataques.size() == 0 || ataques.size() > 4) {
+            throw new QuantidadeInvalidaDeAtaquesException();
         }
     }
 }
