@@ -1,13 +1,18 @@
 package br.com.digix.pokedigixFerias.models;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import br.com.digix.pokedigixFerias.Tipo;
 import br.com.digix.pokedigixFerias.Builders.AtaqueBuilder;
+import br.com.digix.pokedigixFerias.Builders.TipoBuilder;
 
 public class AtaqueTest {
     @Test
-    public void deve_criar_um_ataque() throws AcuraciaInvalidaException, PontosDePoderInvalidoException, ForcaInvalidaException {
+    public void deve_criar_um_ataque()
+            throws AcuraciaInvalidaException, PontosDePoderInvalidoException, ForcaInvalidaException, IOException {
 
         int forca = 40;
         Categoria categoria = Categoria.FISICO;
@@ -61,5 +66,16 @@ public class AtaqueTest {
         Assertions.assertThrows(ForcaInvalidaException.class, () -> {
             new AtaqueBuilder().comForca(-1).construir();
         });
+    }
+
+    @Test
+    public void deve_ter_um_tipo()
+            throws IOException, AcuraciaInvalidaException, PontosDePoderInvalidoException, ForcaInvalidaException {
+
+        Tipo tipo = new TipoBuilder().construir();
+
+        Ataque ataque = new AtaqueBuilder().comTipo(tipo).construir();
+
+        Assertions.assertEquals(tipo, ataque.getTipo());
     }
 }

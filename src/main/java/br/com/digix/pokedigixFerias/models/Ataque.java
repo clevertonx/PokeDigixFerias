@@ -1,5 +1,6 @@
 package br.com.digix.pokedigixFerias.models;
 
+import br.com.digix.pokedigixFerias.Tipo;
 import lombok.Getter;
 
 @Getter
@@ -12,12 +13,15 @@ public class Ataque {
     private String nome;
     private String descricao;
     private int pontosDePoder;
+    private Tipo tipo;
 
-    public Ataque(int forca, Categoria categoria, int acuracia, String nome, String descricao, int pontosDePoder)
+    public Ataque(int forca, Categoria categoria, int acuracia, String nome, String descricao, int pontosDePoder,
+            Tipo tipo)
             throws AcuraciaInvalidaException, PontosDePoderInvalidoException, ForcaInvalidaException {
         verificarAcuraciaEntreZeroeCem(acuracia);
         verificarPontosDePoderEntreZeroeQuarenta(pontosDePoder);
         verificarForcaMenorQueZero(forca);
+        this.tipo = tipo;
         this.forca = forca;
         this.categoria = categoria;
         this.acuracia = acuracia;

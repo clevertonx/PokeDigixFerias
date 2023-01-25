@@ -1,21 +1,23 @@
 package br.com.digix.pokedigixFerias.models;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.aop.ThrowsAdvice;
 
+import br.com.digix.pokedigixFerias.Tipo;
 import br.com.digix.pokedigixFerias.Builders.AtaqueBuilder;
 import br.com.digix.pokedigixFerias.Builders.PokemonBuilder;
+import br.com.digix.pokedigixFerias.Builders.TipoBuilder;
 
 public class PokemonTest {
     @Test
     public void deve_criar_um_pokemon()
             throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException,
             AcuraciaInvalidaException, ForcaInvalidaException, PontosDePoderInvalidoException,
-            QuantidadeInvalidaDeAtaquesException {
+            QuantidadeInvalidaDeAtaquesException, IOException, QuantidadeInvalidaDeTiposException {
         // Arrange
         String nome = "Pikachu";
         char genero = 'F';
@@ -133,4 +135,33 @@ public class PokemonTest {
             new PokemonBuilder().comAtaques(ataques).construir();
         });
     }
+
+    @Test
+    public void deve_poder_ter_dois_tipos() throws Exception {
+
+        Tipo tipo1 = new TipoBuilder().construir();
+        Tipo tipo2 = new TipoBuilder().construir();
+        List<Tipo> tipos = new ArrayList<>();
+        tipos.add(tipo1);
+        tipos.add(tipo2);
+
+        Pokemon pokemon = new PokemonBuilder().comTipo(tipos).construir();
+
+        Assertions.assertTrue(tipos.containsAll(pokemon.getTipos()));
+    }
+
+    @Test
+    public void nao_deve_possuir_mais_que_dois_tipos() throws Exception {
+
+        List<Tipo> tipos = new ArrayList<>();
+        tipos.add(new TipoBuilder().construir());
+        tipos.add(new TipoBuilder().construir());
+        tipos.add(new TipoBuilder().construir());
+
+        Assertions.assertThrows(QuantidadeInvalidaDeTiposException.class, () -> {
+
+            new PokemonBuilder().comTipo(tipos).construir();
+        });
+    }
+
 }

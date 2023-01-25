@@ -1,5 +1,8 @@
 package br.com.digix.pokedigixFerias.Builders;
 
+import java.io.IOException;
+
+import br.com.digix.pokedigixFerias.Tipo;
 import br.com.digix.pokedigixFerias.models.AcuraciaInvalidaException;
 import br.com.digix.pokedigixFerias.models.Ataque;
 import br.com.digix.pokedigixFerias.models.Categoria;
@@ -8,16 +11,21 @@ import br.com.digix.pokedigixFerias.models.PontosDePoderInvalidoException;
 
 public class AtaqueBuilder {
 
-    int forca = 40;
-    Categoria categoria = Categoria.FISICO;
-    int acuracia = 100;
-    String nome = "Blizzard";
-    String descricao = "O usuário invoca uma grande nevasca ao redor dele. Pode deixar os inimigos congelados.";
-    int pontosDePoder = 10;
+    private int forca = 40;
+    private Categoria categoria = Categoria.FISICO;
+    private int acuracia = 100;
+    private String nome = "Blizzard";
+    private String descricao = "O usuário invoca uma grande nevasca ao redor dele. Pode deixar os inimigos congelados.";
+    private int pontosDePoder = 10;
+    private Tipo tipo;
+
+    public AtaqueBuilder() throws IOException {
+        this.tipo = new TipoBuilder().construir();
+    }
 
     public Ataque construir()
             throws AcuraciaInvalidaException, PontosDePoderInvalidoException, ForcaInvalidaException {
-        return new Ataque(forca, categoria, acuracia, nome, descricao, pontosDePoder);
+        return new Ataque(forca, categoria, acuracia, nome, descricao, pontosDePoder, tipo);
     }
 
     public AtaqueBuilder comAcuracia(int acuracia) {
@@ -32,6 +40,11 @@ public class AtaqueBuilder {
 
     public AtaqueBuilder comForca(int forca) {
         this.forca = forca;
+        return this;
+    }
+
+    public AtaqueBuilder comTipo(Tipo tipo) {
+        this.tipo = tipo;
         return this;
     }
 
