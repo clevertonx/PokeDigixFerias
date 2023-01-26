@@ -17,7 +17,8 @@ public class PokemonTest {
     public void deve_criar_um_pokemon()
             throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException,
             AcuraciaInvalidaException, ForcaInvalidaException, PontosDePoderInvalidoException,
-            QuantidadeInvalidaDeAtaquesException, IOException, QuantidadeInvalidaDeTiposException {
+            QuantidadeInvalidaDeAtaquesException, IOException, QuantidadeInvalidaDeTiposException,
+            VelocidadeInvalidaException {
         // Arrange
         String nome = "Pikachu";
         char genero = 'F';
@@ -25,6 +26,7 @@ public class PokemonTest {
         float peso = 2.1f;
         int felicidade = 70;
         int nivel = 5;
+        int velocidade = 100;
 
         // Action
         Pokemon pokemon = new PokemonBuilder().construir();
@@ -36,6 +38,7 @@ public class PokemonTest {
         Assertions.assertEquals(peso, pokemon.getPeso());
         Assertions.assertEquals(felicidade, pokemon.getFelicidade());
         Assertions.assertEquals(nivel, pokemon.getNivel());
+        Assertions.assertEquals(velocidade, pokemon.getVelocidade());
     }
 
     @Test
@@ -98,6 +101,24 @@ public class PokemonTest {
 
         Assertions.assertThrows(QuantidadeInvalidaDeAtaquesException.class, () -> {
             new PokemonBuilder().semAtaque().construir();
+        });
+    }
+
+    @Test
+    public void velocidade_nao_pode_ser_menor_que_um() {
+
+        // Action & Assert
+        Assertions.assertThrows(VelocidadeInvalidaException.class, () -> {
+            new PokemonBuilder().comVelocidade(-1).construir();
+        });
+    }
+
+    @Test
+    public void velocidade_nao_pode_ser_maior_que_cem() {
+
+        // Action & Assert
+        Assertions.assertThrows(VelocidadeInvalidaException.class, () -> {
+            new PokemonBuilder().comVelocidade(101).construir();
         });
     }
 

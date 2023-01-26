@@ -16,16 +16,19 @@ public class Pokemon {
     private float peso;
     private int felicidade;
     private int nivel;
+    private int velocidade;
     private List<Ataque> ataques = new ArrayList<>();
     private List<Tipo> tipos = new ArrayList<>();
 
-    public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel, List<Ataque> ataques, List<Tipo> tipos)
+    public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel, List<Ataque> ataques,
+            List<Tipo> tipos, int velocidade)
             throws FelicidadeInvalidaException, NivelInvalidoException, AlturaInvalidaException, PesoInvalidoException,
-            QuantidadeInvalidaDeAtaquesException, QuantidadeInvalidaDeTiposException {
+            QuantidadeInvalidaDeAtaquesException, QuantidadeInvalidaDeTiposException, VelocidadeInvalidaException {
         verificarFelicidadeEntreZeroeCem(felicidade);
         verificarNivelEntreUmeCem(nivel);
         verificarAltura(altura);
         verificarPeso(peso);
+        verificarVelocidadeEntreUmeCem(velocidade);
         verificarQuantidadeDeAtaque(ataques);
         verificarQuantidadeDeTipo(tipos);
         this.ataques = ataques;
@@ -33,9 +36,11 @@ public class Pokemon {
         this.genero = genero;
         this.altura = altura;
         this.peso = peso;
+        this.velocidade = velocidade;
         this.felicidade = felicidade;
         this.nivel = nivel;
         this.tipos = tipos;
+
     }
 
     private void verificarFelicidadeEntreZeroeCem(int felicidade) throws FelicidadeInvalidaException {
@@ -59,6 +64,12 @@ public class Pokemon {
     private void verificarPeso(float peso) throws PesoInvalidoException {
         if (peso < 0) {
             throw new PesoInvalidoException();
+        }
+    }
+
+    private void verificarVelocidadeEntreUmeCem(int velocidade) throws VelocidadeInvalidaException {
+        if (velocidade < 1 || velocidade > 100) {
+            throw new VelocidadeInvalidaException();
         }
     }
 
