@@ -2,12 +2,12 @@ package br.com.digix.pokedigixFerias.Builders;
 
 import java.io.IOException;
 
-import br.com.digix.pokedigixFerias.Tipo;
 import br.com.digix.pokedigixFerias.models.AcuraciaInvalidaException;
 import br.com.digix.pokedigixFerias.models.Ataque;
 import br.com.digix.pokedigixFerias.models.Categoria;
 import br.com.digix.pokedigixFerias.models.ForcaInvalidaException;
 import br.com.digix.pokedigixFerias.models.PontosDePoderInvalidoException;
+import br.com.digix.pokedigixFerias.models.Tipo;
 
 public class AtaqueBuilder {
 

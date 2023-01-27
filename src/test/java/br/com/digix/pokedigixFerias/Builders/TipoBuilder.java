@@ -2,7 +2,7 @@ package br.com.digix.pokedigixFerias.Builders;
 
 import java.io.IOException;
 
-import br.com.digix.pokedigixFerias.Tipo;
+import br.com.digix.pokedigixFerias.models.Tipo;
 import br.com.digix.pokedigixFerias.utils.ArquivoUtils;
 
 public class TipoBuilder {

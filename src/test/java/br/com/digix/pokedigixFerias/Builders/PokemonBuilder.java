@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.digix.pokedigixFerias.Tipo;
 import br.com.digix.pokedigixFerias.models.AcuraciaInvalidaException;
 import br.com.digix.pokedigixFerias.models.AlturaInvalidaException;
 import br.com.digix.pokedigixFerias.models.Ataque;
@@ -12,6 +11,7 @@ import br.com.digix.pokedigixFerias.models.FelicidadeInvalidaException;
 import br.com.digix.pokedigixFerias.models.ForcaInvalidaException;
 import br.com.digix.pokedigixFerias.models.QuantidadeInvalidaDeAtaquesException;
 import br.com.digix.pokedigixFerias.models.QuantidadeInvalidaDeTiposException;
+import br.com.digix.pokedigixFerias.models.Tipo;
 import br.com.digix.pokedigixFerias.models.VelocidadeInvalidaException;
 import br.com.digix.pokedigixFerias.models.NivelInvalidoException;
 import br.com.digix.pokedigixFerias.models.PesoInvalidoException;

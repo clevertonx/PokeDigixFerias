@@ -1,4 +1,4 @@
-package br.com.digix.pokedigixFerias.models.Tipo;
+package br.com.digix.pokedigixFerias.models;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.digix.pokedigixFerias.Tipo;
 import br.com.digix.pokedigixFerias.Builders.TipoBuilder;
 import br.com.digix.pokedigixFerias.utils.ArquivoUtils;
 

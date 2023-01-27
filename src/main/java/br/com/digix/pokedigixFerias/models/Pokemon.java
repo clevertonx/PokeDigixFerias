@@ -3,7 +3,6 @@ package br.com.digix.pokedigixFerias.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.digix.pokedigixFerias.Tipo;
 import lombok.Getter;
 
 @Getter

@@ -1,6 +1,5 @@
 package br.com.digix.pokedigixFerias.models;
 
-import br.com.digix.pokedigixFerias.Tipo;
 import lombok.Getter;
 
 @Getter
