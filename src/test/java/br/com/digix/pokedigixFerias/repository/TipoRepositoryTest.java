@@ -1,6 +1,5 @@
 package br.com.digix.pokedigixFerias.repository;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public class TipoRepositoryTest {
     private TipoRepository tipoRepository;
 
     @Test
-    public void deve_salvar_um_tipo() throws IOException {
+    public void deve_salvar_um_tipo() throws Exception {
         Tipo tipo = new TipoBuilder().construir();
 
         tipoRepository.save(tipo);
@@ -28,7 +27,7 @@ public class TipoRepositoryTest {
     }
 
     @Test
-    public void deve_remover_um_tipo() throws IOException {
+    public void deve_remover_um_tipo() throws Exception {
         Tipo tipo = new TipoBuilder().construir();
         tipoRepository.save(tipo);
 
@@ -39,7 +38,7 @@ public class TipoRepositoryTest {
     }
 
     @Test
-    public void deve_buscar_pelo_nome() throws IOException {
+    public void deve_buscar_pelo_nome() throws Exception {
         String nome = "Psíquico";
         Tipo tipo = new TipoBuilder().comNome(nome).construir();
         tipoRepository.save(tipo);

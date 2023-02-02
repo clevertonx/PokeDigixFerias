@@ -1,6 +1,7 @@
 package br.com.digix.pokedigixFerias.repository;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import br.com.digix.pokedigixFerias.Builders.AtaqueBuilder;
 import br.com.digix.pokedigixFerias.models.AcuraciaInvalidaException;
 import br.com.digix.pokedigixFerias.models.Ataque;
+import br.com.digix.pokedigixFerias.models.Categoria;
 import br.com.digix.pokedigixFerias.models.ForcaInvalidaException;
 import br.com.digix.pokedigixFerias.models.PontosDePoderInvalidoException;
 
@@ -40,5 +42,16 @@ public class AtaqueRepositoryTest {
 
         Optional<Ataque> tipoBuscado = ataqueRepository.findById(ataque.getId());
         Assertions.assertFalse(tipoBuscado.isPresent());
+    }
+
+    @Test
+    public void deve_buscar_por_categoria() throws Exception {
+        Categoria categoria = Categoria.ESPECIAL;
+        Ataque ataque = new AtaqueBuilder().comCategoria(categoria).construir();
+        ataqueRepository.save(ataque);
+
+        List<Ataque> ataqueRetornado = ataqueRepository.findByCategoria(categoria);
+
+        Assertions.assertTrue(ataqueRetornado.contains(ataque));
     }
 }

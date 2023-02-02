@@ -1,6 +1,9 @@
 package br.com.digix.pokedigixFerias.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,6 +11,7 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -18,12 +22,13 @@ public class Ataque {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int forca;
+    @Enumerated(EnumType.STRING)
     private Categoria categoria;
     private int acuracia;
     private String nome;
     private String descricao;
     private int pontosDePoder;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Tipo tipo;
 
     public Ataque(int forca, Categoria categoria, int acuracia, String nome, String descricao, int pontosDePoder,
