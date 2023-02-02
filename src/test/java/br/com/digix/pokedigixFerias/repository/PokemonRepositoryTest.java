@@ -1,5 +1,6 @@
 package br.com.digix.pokedigixFerias.repository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.digix.pokedigixFerias.Builders.PokemonBuilder;
+import br.com.digix.pokedigixFerias.Builders.TipoBuilder;
 import br.com.digix.pokedigixFerias.models.Pokemon;
+import br.com.digix.pokedigixFerias.models.Tipo;
 
 @DataJpaTest
 public class PokemonRepositoryTest {
@@ -47,6 +50,27 @@ public class PokemonRepositoryTest {
         List<Pokemon> pokemonRetornado = pokemonRepository.findByNomeContainingIgnoreCase(nome);
 
         Assertions.assertTrue(pokemonRetornado.contains(pokemon));
+    }
+
+    @Test
+    public void deve_buscar_pokemon_pelo_tipo() throws Exception {
+        List<Tipo> tipos = Arrays.asList(new TipoBuilder().construir());
+        Pokemon pokemon = new PokemonBuilder().comTipo(tipos).construir();
+        pokemonRepository.save(pokemon);
+
+        List<Pokemon> listaDePokemons = pokemonRepository.findByTiposIn(tipos);
+
+        /*
+         * boolean pokemonEncontrado = false;
+         * for (Pokemon p : listaDePokemons) {
+         * if (p.getTipos().containsAll(tipos)) {
+         * pokemonEncontrado = true;
+         * break;
+         * }
+         * }
+         */
+
+        Assertions.assertTrue(listaDePokemons.contains(pokemon));
     }
 
 }
