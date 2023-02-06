@@ -22,7 +22,7 @@ public class TipoTest {
 
     @Test
     public void deve_possuir_tipo() throws FileNotFoundException, IOException {
-        String nome = "Psíquico";
+        String nome = "Psiquico";
         String cor = "#f366b9";
         byte[] simbolo = this.icone;
 

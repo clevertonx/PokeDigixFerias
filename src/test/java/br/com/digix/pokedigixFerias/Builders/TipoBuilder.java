@@ -7,7 +7,7 @@ import br.com.digix.pokedigixFerias.utils.ArquivoUtils;
 
 public class TipoBuilder {
 
-    private String nome = "Psíquico";
+    private String nome = "Psiquico";
     private String cor = "#f366b9";
     private byte[] simbolo;
 
