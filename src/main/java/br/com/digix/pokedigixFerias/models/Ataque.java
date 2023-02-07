@@ -9,17 +9,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 
 public class Ataque {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonInclude(Include.NON_NULL)
     private Long id;
     private int forca;
     @Enumerated(EnumType.STRING)

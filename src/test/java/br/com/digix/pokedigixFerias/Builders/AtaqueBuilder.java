@@ -53,4 +53,9 @@ public class AtaqueBuilder {
         return this;
     }
 
+    public AtaqueBuilder comNome(String nome) {
+        this.nome = nome;
+        return this;
+    }
+
 }
