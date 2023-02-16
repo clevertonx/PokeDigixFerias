@@ -37,6 +37,7 @@ public class PokemonControllerTest {
 
     @Autowired
     private PokemonRepository pokemonRepository;
+
     @BeforeEach
     @AfterEach
     public void deletaDados() {

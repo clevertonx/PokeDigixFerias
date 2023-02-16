@@ -30,6 +30,7 @@ public class Tipo {
     private String cor;
     @Lob
     private byte[] simbolo;
+    
    
 
     public Tipo(String nome, String cor, byte[] simbolo) {

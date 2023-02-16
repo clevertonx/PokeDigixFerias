@@ -18,7 +18,8 @@ import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 
 public class Ataque {
 
@@ -33,6 +34,7 @@ public class Ataque {
     private String nome;
     private String descricao;
     private int pontosDePoder;
+   
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Tipo tipo;
 

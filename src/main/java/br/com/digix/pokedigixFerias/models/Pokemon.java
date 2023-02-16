@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -21,7 +19,8 @@ import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 
 public class Pokemon {
 
@@ -36,9 +35,9 @@ public class Pokemon {
     private int felicidade;
     private int nivel;
     private int velocidade;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Ataque> ataques = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Tipo> tipos = new ArrayList<>();
 
     public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel, List<Ataque> ataques,
@@ -61,7 +60,6 @@ public class Pokemon {
         this.felicidade = felicidade;
         this.nivel = nivel;
         this.tipos = tipos;
-
     }
 
     private void verificarFelicidadeEntreZeroeCem(int felicidade) throws FelicidadeInvalidaException {
@@ -106,5 +104,4 @@ public class Pokemon {
         }
     }
 
-    
 }

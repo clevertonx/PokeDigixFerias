@@ -1,6 +1,7 @@
 package br.com.digix.pokedigixFerias.controllers;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
